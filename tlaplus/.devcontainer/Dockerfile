@@ -3,6 +3,10 @@ FROM node:20
 ARG TZ
 ENV TZ="$TZ"
 
+# TLA+ Version Configuration
+ENV TLAPLUS_VERSION=v1.7.4
+ENV COMMUNITY_MODULES_VERSION=202505152026
+
 # Install basic development tools and iptables/ipset
 RUN apt update && apt install -y less \
   git \
@@ -106,3 +110,19 @@ USER node
 # Java Config
 ENV LANG=C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/java-24-amazon-corretto
+
+# Install TLA+ Toolbox CLI tools
+USER root
+RUN mkdir -p /opt/tlaplus && \
+    cd /opt/tlaplus && \
+    # TLA+ tools main jar
+    wget https://github.com/tlaplus/tlaplus/releases/download/${TLAPLUS_VERSION}/tla2tools.jar && \
+    # Community Modules
+    wget https://github.com/tlaplus/CommunityModules/releases/download/${COMMUNITY_MODULES_VERSION}/CommunityModules-deps.jar && \
+    # Create executable scripts
+    echo '#!/bin/bash\njava -XX:+UseParallelGC -jar /opt/tlaplus/tla2tools.jar "$@"' > /usr/local/bin/tlc && \
+    echo '#!/bin/bash\njava -cp /opt/tlaplus/tla2tools.jar pcal.trans "$@"' > /usr/local/bin/pcal && \
+    echo '#!/bin/bash\njava -cp /opt/tlaplus/tla2tools.jar tla2sany.SANY "$@"' > /usr/local/bin/sany && \
+    echo '#!/bin/bash\njava -cp /opt/tlaplus/tla2tools.jar tla2tex.TLA "$@"' > /usr/local/bin/tla2tex && \
+    chmod +x /usr/local/bin/tlc /usr/local/bin/pcal /usr/local/bin/sany /usr/local/bin/tla2tex
+USER node
