@@ -23,6 +23,18 @@
 - rust-analyzer extension for IDE support
 - Same base features as Node.js configuration
 
+### TLA+
+
+- TLA+ formal specification language environment
+- TLC model checker for verification
+- PlusCal algorithm language support
+- LaTeX integration for PDF generation
+- Pre-installed CLI tools:
+  - `tlc` - TLA+ model checker
+  - `pcal` - PlusCal translator
+  - `sany` - TLA+ syntax analyzer
+  - `tla2tex` - TLA+ to LaTeX converter
+
 ## Usage
 
 1. Clone this repository:
@@ -36,6 +48,7 @@
 
    - For Node.js/JavaScript: Use `base/.devcontainer/`
    - For Rust: Use `rust/.devcontainer/`
+   - For TLA+: Use `tlaplus/.devcontainer/`
 
 3. Copy the desired `.devcontainer` folder to your project root:
 
@@ -45,6 +58,9 @@
 
    # For Rust projects
    cp -r rust/.devcontainer /path/to/your/project/
+
+   # For TLA+ projects
+   cp -r tlaplus/.devcontainer /path/to/your/project/
    ```
 
 4. Open your project in VS Code and select "Reopen in Container"
