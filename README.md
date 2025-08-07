@@ -44,23 +44,15 @@
    cd claude-code-devcontainer-for-dood
    ```
 
-2. Choose your development environment:
+2. Choose your development environment. For example:
 
    - For Node.js/JavaScript: Use `base/.devcontainer/`
-   - For Rust: Use `rust/.devcontainer/`
-   - For TLA+: Use `tlaplus/.devcontainer/`
 
 3. Copy the desired `.devcontainer` folder to your project root:
 
    ```bash
-   # For Node.js projects
+   # Example for Node.js projects
    cp -r base/.devcontainer /path/to/your/project/
-
-   # For Rust projects
-   cp -r rust/.devcontainer /path/to/your/project/
-
-   # For TLA+ projects
-   cp -r tlaplus/.devcontainer /path/to/your/project/
    ```
 
 4. Open your project in VS Code and select "Reopen in Container"
