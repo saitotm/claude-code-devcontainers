@@ -3,6 +3,11 @@ FROM node:20
 ARG TZ
 ENV TZ="$TZ"
 
+# CIVL version configuration
+ARG CIVL_VERSION=1.22
+ARG CIVL_REVISION=5854
+ARG CIVL_VERSION_FULL=${CIVL_VERSION}_${CIVL_REVISION}
+
 # Install basic development tools and iptables/ipset
 RUN apt update && apt install -y less \
   git \
@@ -35,11 +40,11 @@ RUN wget -O- https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/share
 
 # Install CIVL
 RUN cd /opt && \
-    wget https://vsl.cis.udel.edu/lib/sw/civl/1.22/r5854/release/CIVL-1.22_5854.tgz && \
-    tar -xzf CIVL-1.22_5854.tgz && \
-    rm CIVL-1.22_5854.tgz && \
-    chmod +x /opt/CIVL-1.22_5854/bin/civl && \
-    ln -s /opt/CIVL-1.22_5854/bin/civl /usr/local/bin/civl
+    wget https://vsl.cis.udel.edu/lib/sw/civl/${CIVL_VERSION}/r${CIVL_REVISION}/release/CIVL-${CIVL_VERSION_FULL}.tgz && \
+    tar -xzf CIVL-${CIVL_VERSION_FULL}.tgz && \
+    rm CIVL-${CIVL_VERSION_FULL}.tgz && \
+    chmod +x /opt/CIVL-${CIVL_VERSION_FULL}/bin/civl && \
+    ln -s /opt/CIVL-${CIVL_VERSION_FULL}/bin/civl /usr/local/bin/civl
 
 # Clean apt
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
