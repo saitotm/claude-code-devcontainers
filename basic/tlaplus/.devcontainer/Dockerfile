@@ -23,17 +23,7 @@ RUN apt update && apt install -y less \
   iproute2 \
   dnsutils \
   aggregate \
-  jq \
-  ca-certificates \
-  gnupg \
-  lsb-release
-
-# Install Docker CLI
-RUN mkdir -m 0755 -p /etc/apt/keyrings && \
-  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-  apt update && \
-  apt install -y docker-ce-cli docker-compose-plugin
+  jq
 
 # Install Amazon Corretto
 RUN wget -O- https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg \
@@ -52,9 +42,6 @@ RUN mkdir -p /usr/local/share/npm-global && \
   chown -R node:node /usr/local/share
 
 ARG USERNAME=node
-
-# Add user to docker group for Docker outside of Docker
-RUN groupadd -f docker && usermod -aG docker $USERNAME
 
 # Persist bash history.
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
