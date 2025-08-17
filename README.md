@@ -9,34 +9,14 @@ Pre-configured development containers optimized for [Claude Code](https://claude
 - 🔧 **Development tools**: Git, VS Code extensions, and language-specific tooling
 - 🐳 **Optional Docker support**: DOOD capability available for environments that need it
 
-## Available Configurations
+## Available Environments
 
-### Basic Environments
+### Basic (No Docker Required)
+- **TLA+** (`basic/tlaplus/`) - Formal specification language with TLC model checker
 
-#### TLA+
-- TLA+ formal specification language environment
-- TLC model checker for verification
-- PlusCal algorithm language support
-- LaTeX integration for PDF generation
-- Pre-installed CLI tools:
-  - `tlc` - TLA+ model checker
-  - `pcal` - PlusCal translator
-  - `sany` - TLA+ syntax analyzer
-  - `tla2tex` - TLA+ to LaTeX converter
-
-### Docker-Required Environments
-
-#### DOOD Base (Node.js/JavaScript)
-- Node.js development environment with Docker access
-- ESLint, Prettier, GitLens extensions
-- Zsh shell with bash history persistence
-- Access to host Docker daemon from within the container
-
-#### DOOD Rust
-- Rust development environment with Cargo and Docker access
-- rust-analyzer extension for IDE support
-- Same base features as Node.js configuration
-- Access to host Docker daemon from within the container
+### Docker-Required (DOOD)
+- **Node.js/JavaScript** (`docker-required/dood/base/`) - Node.js development with Docker access
+- **Rust** (`docker-required/dood/rust/`) - Rust development with Cargo and Docker access
 
 ## Usage
 
