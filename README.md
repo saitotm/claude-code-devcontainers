@@ -2,18 +2,6 @@
 
 Pre-configured development containers optimized for [Claude Code](https://claude.ai/code), enabling AI-assisted development across various programming languages and environments.
 
-## Repository Structure
-
-```
-.
-├── basic/             # DevContainers that don't require Docker
-│   └── tlaplus/       # TLA+ formal specification language
-└── docker-required/   # DevContainers that require Docker access
-    └── dood/          # Docker-outside-of-Docker configurations
-        ├── base/      # Node.js/JavaScript with DOOD
-        └── rust/      # Rust with DOOD
-```
-
 ## Features
 
 - 🧠 **Claude Code Integration**: Pre-configured with Claude Code extension
