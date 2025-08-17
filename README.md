@@ -12,6 +12,7 @@ Pre-configured development containers optimized for [Claude Code](https://claude
 ## Available Environments
 
 ### Basic (No Docker Required)
+- **Node.js/JavaScript** (`basic/base/`) - Node.js development environment with Claude Code integration
 - **TLA+** (`basic/tlaplus/`) - Formal specification language with TLC model checker
 
 ### Docker-Required (DOOD)
