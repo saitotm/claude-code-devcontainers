@@ -1,30 +1,31 @@
-# Claude Code DevContainer with DOOD Support
+# Claude Code DevContainers
 
-[Claude Code](https://claude.ai/code) development containers with Docker-outside-of-Docker (DooD) capability for different programming languages.
+Pre-configured development containers optimized for [Claude Code](https://claude.ai/code), enabling AI-assisted development across various programming languages and environments.
+
+## Repository Structure
+
+```
+.
+├── basic/             # DevContainers that don't require Docker
+│   └── tlaplus/       # TLA+ formal specification language
+└── docker-required/   # DevContainers that require Docker access
+    └── dood/          # Docker-outside-of-Docker configurations
+        ├── base/      # Node.js/JavaScript with DOOD
+        └── rust/      # Rust with DOOD
+```
 
 ## Features
 
-- 🐳 **Docker-outside-of-Docker**: Access host Docker daemon from within the container
 - 🧠 **Claude Code Integration**: Pre-configured with Claude Code extension
 - 📦 **Language-specific configurations**: Tailored environments for different development needs
 - 🔧 **Development tools**: Git, VS Code extensions, and language-specific tooling
+- 🐳 **Optional Docker support**: DOOD capability available for environments that need it
 
 ## Available Configurations
 
-### Base (Node.js/JavaScript)
+### Basic Environments
 
-- Node.js development environment
-- ESLint, Prettier, GitLens extensions
-- Zsh shell with bash history persistence
-
-### Rust
-
-- Rust development environment with Cargo
-- rust-analyzer extension for IDE support
-- Same base features as Node.js configuration
-
-### TLA+
-
+#### TLA+
 - TLA+ formal specification language environment
 - TLC model checker for verification
 - PlusCal algorithm language support
@@ -35,24 +36,42 @@
   - `sany` - TLA+ syntax analyzer
   - `tla2tex` - TLA+ to LaTeX converter
 
+### Docker-Required Environments
+
+#### DOOD Base (Node.js/JavaScript)
+- Node.js development environment with Docker access
+- ESLint, Prettier, GitLens extensions
+- Zsh shell with bash history persistence
+- Access to host Docker daemon from within the container
+
+#### DOOD Rust
+- Rust development environment with Cargo and Docker access
+- rust-analyzer extension for IDE support
+- Same base features as Node.js configuration
+- Access to host Docker daemon from within the container
+
 ## Usage
 
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/saitotm/claude-code-devcontainer-for-dood.git
-   cd claude-code-devcontainer-for-dood
+   git clone https://github.com/saitotm/claude-code-devcontainers.git
+   cd claude-code-devcontainers
    ```
 
-2. Choose your development environment. For example:
+2. Choose your development environment based on your needs:
 
-   - For Node.js/JavaScript: Use `base/.devcontainer/`
+   - **Basic**: Use configurations from `basic/` for environments that don't require Docker
+   - **Docker-required**: Use configurations from `docker-required/` if you need Docker access
 
 3. Copy the desired `.devcontainer` folder to your project root:
 
    ```bash
-   # Example for Node.js projects
-   cp -r base/.devcontainer /path/to/your/project/
+   # Example for TLA+ projects (no Docker required)
+   cp -r basic/tlaplus/.devcontainer /path/to/your/project/
+   
+   # Example for Node.js projects with Docker support
+   cp -r docker-required/dood/base/.devcontainer /path/to/your/project/
    ```
 
 4. Open your project in VS Code and select "Reopen in Container"
