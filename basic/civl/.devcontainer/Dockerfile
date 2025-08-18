@@ -4,8 +4,8 @@ ARG TZ
 ENV TZ="$TZ"
 
 # CIVL version configuration
-ARG CIVL_VERSION=1.22
-ARG CIVL_REVISION=5854
+ARG CIVL_VERSION=1.20
+ARG CIVL_REVISION=5259
 ARG CIVL_VERSION_FULL=${CIVL_VERSION}_${CIVL_REVISION}
 
 # Install basic development tools and iptables/ipset
