@@ -13,6 +13,7 @@ Pre-configured development containers optimized for [Claude Code](https://claude
 
 ### Basic (No Docker Required)
 - **Node.js/JavaScript** (`basic/base/`) - Node.js development environment with Claude Code integration
+- **CIVL** (`basic/civl/`) - Concurrent program verification framework for C/CUDA/OpenMP/MPI
 - **TLA+** (`basic/tlaplus/`) - Formal specification language with TLC model checker
 
 ### Docker-Required (DOOD)
