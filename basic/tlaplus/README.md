@@ -6,10 +6,12 @@ TLA+ formal specification language environment optimized for Claude Code.
 
 - TLA+ formal specification language environment
 - TLC model checker for verification
+- Apalache symbolic model checker for SMT-based verification
 - PlusCal algorithm language support
 - LaTeX integration for PDF generation
 - Pre-installed CLI tools:
   - `tlc` - TLA+ model checker
+  - `apalache-mc` - Apalache symbolic model checker
   - `pcal` - PlusCal translator
   - `sany` - TLA+ syntax analyzer
   - `tla2tex` - TLA+ to LaTeX converter

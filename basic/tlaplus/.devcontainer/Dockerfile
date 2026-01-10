@@ -3,8 +3,9 @@ FROM node:20
 ARG TZ
 ENV TZ="$TZ"
 
-# TLA+ Version Configuration
-ENV TLAPLUS_VERSION=v1.7.4
+# TLA+ & Apalache Version Configuration
+ENV TLAPLUS_VERSION=1.7.4
+ENV APALACHE_VERSION=0.52.1
 ENV COMMUNITY_MODULES_VERSION=202505152026
 
 # Install basic development tools and iptables/ipset
@@ -83,8 +84,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
   -x
 
 # Install Claude
-RUN npm install -g @anthropic-ai/claude-code@1.0.53
-RUN echo "alias claude='DISABLE_AUTOUPDATER=1 claude'" >> /home/node/.zshrc
+RUN npm install -g @anthropic-ai/claude-code
 
 # Copy and set up firewall script
 COPY init-firewall.sh /usr/local/bin/
@@ -103,7 +103,11 @@ USER root
 RUN mkdir -p /opt/tlaplus && \
     cd /opt/tlaplus && \
     # TLA+ tools main jar
-    wget https://github.com/tlaplus/tlaplus/releases/download/${TLAPLUS_VERSION}/tla2tools.jar && \
+    wget https://github.com/tlaplus/tlaplus/releases/download/v${TLAPLUS_VERSION}/tla2tools.jar && \
+    # apalache-mc
+    wget https://github.com/apalache-mc/apalache/releases/download/v${APALACHE_VERSION}/apalache-${APALACHE_VERSION}.tgz && \
+    tar -xzvf apalache-${APALACHE_VERSION}.tgz && \
+    ln -s /opt/tlaplus/apalache-${APALACHE_VERSION}/bin/apalache-mc /usr/local/bin/apalache-mc && \
     # Community Modules
     wget https://github.com/tlaplus/CommunityModules/releases/download/${COMMUNITY_MODULES_VERSION}/CommunityModules-deps.jar && \
     # Create executable scripts
@@ -111,5 +115,5 @@ RUN mkdir -p /opt/tlaplus && \
     echo '#!/bin/bash\njava -cp /opt/tlaplus/tla2tools.jar pcal.trans "$@"' > /usr/local/bin/pcal && \
     echo '#!/bin/bash\njava -cp /opt/tlaplus/tla2tools.jar tla2sany.SANY "$@"' > /usr/local/bin/sany && \
     echo '#!/bin/bash\njava -cp /opt/tlaplus/tla2tools.jar tla2tex.TLA "$@"' > /usr/local/bin/tla2tex && \
-    chmod +x /usr/local/bin/tlc /usr/local/bin/pcal /usr/local/bin/sany /usr/local/bin/tla2tex
+    chmod +x /usr/local/bin/tlc /usr/local/bin/apalache-mc /usr/local/bin/pcal /usr/local/bin/sany /usr/local/bin/tla2tex
 USER node
